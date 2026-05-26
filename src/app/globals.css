@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&display=swap');
+@import "tailwindcss";
+
+/* ── Design Tokens ─────────────────────────────────────── */
+@theme inline {
+  /* Brand colours */
+  --color-navy:        #0B1D3A;
+  --color-navy-deep:   #071326;
+  --color-navy-mid:    #122347;
+  --color-amber:       #E87C1E;
+  --color-amber-light: #F5A855;
+  --color-white:       #FFFFFF;
+  --color-off-white:   #FAFBFC;
+  --color-slate:       #F5F7FA;
+  --color-text:        #1A202C;
+  --color-muted:       #718096;
+  --color-border:      #E2E8F0;
+  --color-border-dark: rgba(255,255,255,0.08);
+
+  /* Fonts */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* ── Base ──────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Typography helpers ────────────────────────────────── */
+.font-display { font-family: var(--font-display); }
+
+/* ── Reveal animations ─────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1),
+              transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-24px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1),
+              transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1),
+              transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── Marquee ──────────────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 35s linear infinite;
+  display: flex;
+  width: max-content;
+}
+.animate-marquee:hover { animation-play-state: paused; }
+
+/* ── Glassmorphism ─────────────────────────────────────── */
+.glass {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.glass-stats {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* ── Hero overlay ─────────────────────────────────────── */
+.hero-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(7,19,38,0.88) 0%,
+    rgba(11,29,58,0.75) 60%,
+    rgba(11,29,58,0.60) 100%
+  );
+}
+
+/* ── Amber corner accents ─────────────────────────────── */
+.corner-tl::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 60px; height: 60px;
+  border-top: 2px solid #E87C1E;
+  border-left: 2px solid #E87C1E;
+}
+.corner-br::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 60px; height: 60px;
+  border-bottom: 2px solid #E87C1E;
+  border-right: 2px solid #E87C1E;
+}
+
+/* ── Scroll reveal JS hook ─────────────────────────────── */
+[data-animate] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1),
+              transform 0.65s cubic-bezier(0.16,1,0.3,1);
+}
+[data-animate].in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
